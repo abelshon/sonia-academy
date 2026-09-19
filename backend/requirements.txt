@@ -1,0 +1,6 @@
+Flask>=3.0,<4
+Flask-Cors>=4,<7
+supabase>=2,<3
+python-dotenv>=1,<2
+Werkzeug>=3,<4
+gunicorn>=22,<24
