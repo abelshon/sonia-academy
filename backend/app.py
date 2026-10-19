@@ -2,7 +2,7 @@ import os
 import uuid
 from datetime import timedelta, datetime, timezone
 from functools import wraps
-from flask import Flask, jsonify, request, session, send_from_directory
+from flask import Flask, jsonify, request, session, send_from_directory, Response
 from flask_cors import CORS
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -16,6 +16,17 @@ FRONTEND_DIR=os.path.abspath(os.path.join(BASE_DIR,"..","frontend"))
 app=Flask(__name__)
 app.secret_key=os.environ["SECRET_KEY"]
 app.permanent_session_lifetime=timedelta(hours=8)
+
+@app.get("/sitemap.xml")
+def sitemap():
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://soniamusic-institute.com/</loc>
+  </url>
+</urlset>"""
+    return Response(xml, mimetype="application/xml")
+
 origins=[x.strip() for x in os.environ.get("FRONTEND_ORIGIN","").split(",") if x.strip()]
 CORS(app, origins=origins or "*", supports_credentials=True)
 

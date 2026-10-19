@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://soniamusic-institute.com/sitemap.xml
